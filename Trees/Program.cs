@@ -45,18 +45,21 @@ namespace Trees
             Console.WriteLine("Given a BST, create a linked list of all the nodes at each depth.");
 
             // 1. create bst
-            Console.WriteLine("\n1. Create binary tree.");
+            Console.WriteLine("\n1. Create binary search tree.");
             TreeNode<string> root = GetBst();
 
             // 2. find the depth of the tree
             Console.WriteLine("2. Find the depth of the tree.");
             int depth = GetBstDepth(root);
+            Console.WriteLine($"Depth is {depth}");
 
             // 3. create a list of linked lists
-            List<ListNode<string>> listOfListNodes = GetListOfListNodes(depth);
+            //List<ListNode<string>> listOfListNodes = GetListOfListNodes(depth);
 
             // 4. print list of linked lists to confirm
-            PrintListOfListNodes(listOfListNodes);
+            //PrintListOfListNodes(listOfListNodes);
+
+            Console.ReadKey();
         }
 
         private static void PrintListOfListNodes(List<ListNode<string>> listOfListNodes)
@@ -69,9 +72,24 @@ namespace Trees
             throw new NotImplementedException();
         }
 
-        private static int GetBstDepth(TreeNode<string> root)
+        private static int GetBstDepth(TreeNode<string> treeNode)
         {
-            throw new NotImplementedException();
+            // base case
+            if (treeNode == null)
+            {
+                return 0;
+            }
+            else
+            {
+                // left case
+                int leftDepth = GetBstDepth(treeNode.Left);
+
+                // right case
+                int rightDepth = GetBstDepth(treeNode.Right);
+
+                // return larger of left case or right case
+                return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
+            }
         }
 
         private static TreeNode<string> GetBst()
