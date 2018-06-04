@@ -82,6 +82,12 @@ namespace Trees
             // D) return false at end of method 
 
             // 4. You are given a binary tree in which each node contains a value. Design an algorithm to print all paths which sum to a given value. Note that a path can start or end anywhere in the tree.
+            // Q: Is the value an int? input = root, value, sum? output = void, print to console?
+            // A) public void PrintPathsToSum(root, sum, listOfValues)
+            //        if (list.Sum() == sum) PrintList() & move left and right;
+            //        if (list.Sum() > sum) move left and right through the tree
+            //        if (list.Sum() < sum) add node.Value to the list
+
 
             Console.ReadKey();
         }
