@@ -46,7 +46,7 @@ namespace Trees
 
             // 1. create bst
             Console.WriteLine("\n1. Create binary search tree.");
-            TreeNode<string> root = GetBst();
+            TreeNode<string> root = GetAlphaBst();
 
             // 2. find the depth of the tree
             Console.WriteLine("2. Find the depth of the tree.");
@@ -58,6 +58,22 @@ namespace Trees
 
             // 4. print list of linked lists to confirm
             //PrintListOfListNodes(listOfListNodes);
+
+
+            // 1. Write an algorithm to find the next node (i.e in-order successor) of a given node in a binary search tree. You may assume that each node has a link to its parent.
+            // Q: What is an in-order successor? A: Next node in in-order traversal. This is also the node with the smallest key greater than the input key. 
+            // Q: input = a node, output = a node
+            // if the right subtree != null, the in-order successor is here somewhere. Move 1) right, then 2) all the way left if possible
+            // if the right subtree == null, determine whether the current node is a left child. If so, the parent of the current node is the in-roder successor of the input node.
+
+            // 2. Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree. Avoid storing additional nodes in a data structure. NOTE: This is not necessarily a BST
+            // Q: input = 2 nodes & root, output = the first common ancestor, link to the parent, can a node be its own parent, the root contains both nodes, right? Can we assume unique data in the nodes?
+            // A) if the root matches either node, then return it
+            // B) Use boolean arrays to store search results for search of left, right sides
+            // c) Recurse until nodes are found on different sides, then return root
+
+            // 3. You have 2 very large binary trees: T1 with millions of nodes, and T2 with hundreds of nodes. Create an algorithm to decide if T2 is a subtree of T1. A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2. That is, if you cut off the tree at node n, the two trees would be identical.
+            // Q: input = rootA & rootB? Output = boolean.
 
             Console.ReadKey();
         }
@@ -92,7 +108,7 @@ namespace Trees
             }
         }
 
-        private static TreeNode<string> GetBst()
+        private static TreeNode<string> GetAlphaBst()
         {
             TreeNode<string> root = new TreeNode<string>("d");
             root.Left = new TreeNode<string>("b");
