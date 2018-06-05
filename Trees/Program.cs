@@ -85,28 +85,82 @@ namespace Trees
             TreeNode<string> root = GetAlphaBst();
 
             // B. find the depth of the tree
-            Console.WriteLine("B. Find the depth of the tree.");
+            Console.WriteLine("B. Find the depth of the tree. Turns out there's no need to do this?");
             int depth = GetBstDepth(root);
             Console.WriteLine($"Depth is {depth}");
-            Console.ReadKey();
-
-            // C. Create linked lists for each depth by traversing the tree and keeping track of depth
-            Console.WriteLine("C. Create linked lists for each depth");
+            
+            // C. Create linked lists
+            Console.WriteLine("C. Create linked lists for each depth. Store in a list of linkedlists");
+            List<ListNode<string>> listOfLinkedLists = GetListOfLinkedLists(depth);
+            
+            Console.WriteLine($"Size of listOfLinkedList = {listOfLinkedLists.Count}");
 
             // D. Traverse the tree and store data in the linked lists
             Console.WriteLine("D. Traverse the tree and store the data in the linked lists.");
+            PopulateListOfLinkedLists(listOfLinkedLists, root, 0);
+            PrintListNodesAtEachDepth(listOfLinkedLists);
+
+            Console.ReadKey();
         }
 
-        private static void PrintListOfListNodes(List<ListNode<string>> listOfListNodes)
+        private static void PrintListNodesAtEachDepth(List<ListNode<string>> listOfLinkedLists)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < listOfLinkedLists.Count; ++i)
+            {
+                var current = listOfLinkedLists[i];
+                while (current != null)
+                {
+                    Console.Write(current.Data + " ");
+                    current = current.Next;
+                }
+                Console.WriteLine("\n");
+            }
         }
 
-        private static List<ListNode<string>> GetListOfListNodes(int depth)
+        private static void PopulateListOfLinkedLists(List<ListNode<string>> listOfLinkedLists, TreeNode<string> root, int depth)
         {
-            throw new NotImplementedException();
+            if (root == null)
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine(root.Data);
+                // 1st create a new ListNode
+                var listNode = new ListNode<string>(root.Data);
+
+                // Either start new linked list or add to an existing linked list
+                if (listOfLinkedLists[depth] == null)
+                {
+                    listOfLinkedLists[depth] = listNode;
+                }
+                else // a linked list already exists at this depth (index), so add to it
+                {
+                    listOfLinkedLists[depth].Next = listNode;
+                }
+
+                // increment depth
+                ++depth;
+
+                // traverse the tree
+                PopulateListOfLinkedLists(listOfLinkedLists, root.Left, depth);
+                PopulateListOfLinkedLists(listOfLinkedLists, root.Right, depth);
+            }
         }
 
+        private static List<ListNode<string>> GetListOfLinkedLists(int depth)
+        {
+            var listOfListNodes = new List<ListNode<string>>();
+            for (int i = 0; i < depth; i++)
+            {
+                var node = new ListNode<string>("a");
+                node = null;
+                listOfListNodes.Add(node);
+            }
+
+            return listOfListNodes;
+        }
+        
         private static int GetBstDepth(TreeNode<string> treeNode)
         {
             // base case
