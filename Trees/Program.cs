@@ -105,6 +105,7 @@ namespace Trees
 
         private static void PrintListNodesAtEachDepth(List<ListNode<string>> listOfLinkedLists)
         {
+            Console.WriteLine();
             for (int i = 0; i < listOfLinkedLists.Count; ++i)
             {
                 var current = listOfLinkedLists[i];
@@ -113,17 +114,18 @@ namespace Trees
                     Console.Write(current.Data + " ");
                     current = current.Next;
                 }
-                Console.WriteLine("\n");
+                Console.WriteLine();
             }
         }
 
         private static void PopulateListOfLinkedLists(List<ListNode<string>> listOfLinkedLists, TreeNode<string> root, int depth)
         {
+            // base case
             if (root == null)
             {
                 return;
             }
-            else
+            else // add some nodes!
             {
                 Console.WriteLine(root.Data);
                 // 1st create a new ListNode
@@ -134,9 +136,10 @@ namespace Trees
                 {
                     listOfLinkedLists[depth] = listNode;
                 }
-                else // a linked list already exists at this depth (index), so add to it
+                else // a linked list already exists at this depth (index), so add to it to the front of the linked list
                 {
-                    listOfLinkedLists[depth].Next = listNode;
+                    listNode.Next = listOfLinkedLists[depth];
+                    listOfLinkedLists[depth] = listNode;
                 }
 
                 // increment depth
