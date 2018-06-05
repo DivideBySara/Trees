@@ -85,7 +85,7 @@ namespace Trees
             TreeNode<string> root = GetAlphaBst();
 
             // B. find the depth of the tree
-            Console.WriteLine("B. Find the depth of the tree. Turns out there's no need to do this?");
+            Console.WriteLine("B. Find the depth of the tree. Turns out there's no need to do this if main method includes creating the listoflists. Maybe update method?");
             int depth = GetBstDepth(root);
             Console.WriteLine($"Depth is {depth}");
             
@@ -127,16 +127,21 @@ namespace Trees
             }
             else // add some nodes!
             {
-                Console.WriteLine(root.Data);
+                Console.WriteLine(root.Data); // for testing
+
                 // 1st create a new ListNode
                 var listNode = new ListNode<string>(root.Data);
 
-                // Either start new linked list or add to an existing linked list
-                if (listOfLinkedLists[depth] == null)
+                // case listOfLinkedLists is null
+                if (listOfLinkedLists == null)
                 {
-                    listOfLinkedLists[depth] = listNode;
+                    listOfLinkedLists = new List<ListNode<string>>();
+                }                
+                else if (depth > listOfLinkedLists.Count) // case list doesn't have this index (depth) yet
+                {
+                    listOfLinkedLists.Add(listNode);
                 }
-                else // a linked list already exists at this depth (index), so add to it to the front of the linked list
+                else // case a linked list already exists at this depth (index), so add to it to the front of the linked list
                 {
                     listNode.Next = listOfLinkedLists[depth];
                     listOfLinkedLists[depth] = listNode;
