@@ -36,23 +36,6 @@ namespace Trees
     {
         static void Main(string[] args)
         {
-            // 21. Given a BST, create a linkedlist of all the nodes at each depth
-            // Q's: Is the tree balanced? How deep is it? 
-            // Input = a bst?
-            // Output = a list of linked lists?
-            // Should I write my TreeNode and ListNode classes? Handle edge cases?
-
-            Console.WriteLine("Given a BST, create a linked list of all the nodes at each depth.");
-
-            // 1. create bst
-            Console.WriteLine("\n1. Create binary search tree.");
-            TreeNode<string> root = GetAlphaBst();
-
-            // 2. find the depth of the tree
-            Console.WriteLine("2. Find the depth of the tree.");
-            int depth = GetBstDepth(root);
-            Console.WriteLine($"Depth is {depth}");
-
             // 3. create a list of linked lists
             //List<ListNode<string>> listOfListNodes = GetListOfListNodes(depth);
 
@@ -88,8 +71,30 @@ namespace Trees
             //        if (list.Sum() > sum) move left and right through the tree
             //        if (list.Sum() < sum) add node.Value to the list
 
+            // This next set of tree problems includes tree traversals
+            // 1. Given a BST, create a linkedlist of all the nodes at each depth
+            // Q's: Is the tree balanced? How deep is it? 
+            // Input = a bst?
+            // Output = a list of linked lists?
+            // Should I write my TreeNode and ListNode classes? Handle edge cases?
+            Console.WriteLine("\nThis set of tree problems includes traversals.");
+            Console.WriteLine("1. Given a BST, create a linked list of all the nodes at each depth.");
 
+            // A. create bst
+            Console.WriteLine("\nA. Create binary search tree.");
+            TreeNode<string> root = GetAlphaBst();
+
+            // B. find the depth of the tree
+            Console.WriteLine("B. Find the depth of the tree.");
+            int depth = GetBstDepth(root);
+            Console.WriteLine($"Depth is {depth}");
             Console.ReadKey();
+
+            // C. Create linked lists for each depth by traversing the tree and keeping track of depth
+            Console.WriteLine("C. Create linked lists for each depth");
+
+            // D. Traverse the tree and store data in the linked lists
+            Console.WriteLine("D. Traverse the tree and store the data in the linked lists.");
         }
 
         private static void PrintListOfListNodes(List<ListNode<string>> listOfListNodes)
@@ -109,7 +114,7 @@ namespace Trees
             {
                 return 0;
             }
-            else
+            else // depth is at least 1
             {
                 // left case
                 int leftDepth = GetBstDepth(treeNode.Left);
@@ -118,7 +123,7 @@ namespace Trees
                 int rightDepth = GetBstDepth(treeNode.Right);
 
                 // return larger of left case or right case
-                return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
+                return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1; // Need to add 1 for root node
             }
         }
 
