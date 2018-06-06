@@ -110,8 +110,47 @@ namespace Trees
             PrintLinkedList(linkedList);
 
             // 3. Determine if a binary tree is balanced
+            // Q: Balanced = Any node without 2 children is no more than 1 level from any other node without 2 children
+            // Q: input = root, data structure to hold depth levels like an empty list, won't need anything larger because if size 3, return false
+            // Q: output = boolean
+            Console.WriteLine("\n3. Determine if a binary tree is balanced.");
+            bool isBinaryTreeBalanced = false;
+            var depthLevels = new Dictionary<int, int>();
+            isBinaryTreeBalanced = IsBinaryTreeBalanced(root, depthLevels, isBinaryTreeBalanced);
 
             Console.ReadKey();
+        }
+
+        private static bool IsBinaryTreeBalanced(TreeNode<string> root, Dictionary<int, int> depthLevels, bool isBinaryTreeBalanced)
+        {
+            // base case
+            if (root == null)
+            {
+                return isBinaryTreeBalanced;
+            }
+            // check node for 2 children
+            // if 2 children, traverse tree
+            else if (root.Left != null && root.Right != null)
+            {
+                IsBinaryTreeBalanced(root.Left, depthLevels, isBinaryTreeBalanced);
+                IsBinaryTreeBalanced(root.Right, depthLevels, isBinaryTreeBalanced);
+            }
+            else if (root.Left != null) // if 1 child on left, record level, check for false, and traverse right
+            {
+
+            }
+
+            
+
+            
+
+            
+
+            // if 1 child on right, record level, check for false, and traverse left
+
+            // if no children, record level, check for false, and traverse in both directions
+
+            // return at end of method is probably necessary
         }
 
         private static void PrintLinkedList(LinkedList<string> linkedList)
