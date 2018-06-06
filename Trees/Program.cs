@@ -100,7 +100,41 @@ namespace Trees
             PopulateListOfLinkedLists(listOfLinkedLists, root, 0);
             PrintListNodesAtEachDepth(listOfLinkedLists);
 
+            // 2. Convert a bst into a doubly-linked list
+            // Q: Should the elements of the linked list be in ascending order?
+            // input = root, output = doubly-linked list?
+            // use built-in LinkedList?
+            Console.WriteLine("\n2. Convert a bst into a doubly-linked list");
+            var linkedList = new LinkedList<string>();
+            PopulateLinkedListFromBST(root, linkedList);
+            PrintLinkedList(linkedList);
+
             Console.ReadKey();
+        }
+
+        private static void PrintLinkedList(LinkedList<string> linkedList)
+        {
+            for (int i = 0; i < linkedList.Count; i++)
+            {
+                Console.Write($"{linkedList.ElementAt(i)} ");
+            }
+        }
+
+        private static void PopulateLinkedListFromBST(TreeNode<string> root, LinkedList<string> linkedList)
+        {
+            // base case
+            if (root == null)
+            {
+                return;
+            }            
+            else // add the nodes!
+            {
+                linkedList.AddFirst(root.Data);
+            }
+
+            // traverse the bst
+            PopulateLinkedListFromBST(root.Left, linkedList);
+            PopulateLinkedListFromBST(root.Right, linkedList);
         }
 
         private static void PrintListNodesAtEachDepth(List<ListNode<string>> listOfLinkedLists)
