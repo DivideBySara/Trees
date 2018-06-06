@@ -109,6 +109,8 @@ namespace Trees
             PopulateLinkedListFromBST(root, linkedList);
             PrintLinkedList(linkedList);
 
+            // 3. Determine if a binary tree is balanced
+
             Console.ReadKey();
         }
 
