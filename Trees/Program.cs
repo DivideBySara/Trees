@@ -113,44 +113,59 @@ namespace Trees
             // Q: Balanced = Any node without 2 children is no more than 1 level from any other node without 2 children
             // Q: input = root, data structure to hold depth levels like an empty list, won't need anything larger because if size 3, return false
             // Q: output = boolean
-            Console.WriteLine("\n3. Determine if a binary tree is balanced.");
-            bool isBinaryTreeBalanced = false;
-            var depthLevels = new Dictionary<int, int>();
-            isBinaryTreeBalanced = IsBinaryTreeBalanced(root, depthLevels, isBinaryTreeBalanced);
+            Console.WriteLine("\n\n3. Determine if a binary tree is balanced.");
+            var depthLevels = new SortedSet<int>();
+            bool isBinaryTreeBalanced = IsBinaryTreeBalanced(root, depthLevels, false, 0);
+
+            // case: balanced bst already created
+            Console.WriteLine($"Is the binary tree balanced? {isBinaryTreeBalanced}");
+
+            // case: root = null
+            Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(null, depthLevels, false, 0)}");
+
+            // case: unbalanced tree
+            root.Left = null;
+            Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(root, depthLevels, false, 0)}");
 
             Console.ReadKey();
         }
 
-        private static bool IsBinaryTreeBalanced(TreeNode<string> root, Dictionary<int, int> depthLevels, bool isBinaryTreeBalanced)
+        private static bool IsBinaryTreeBalanced(TreeNode<string> root, SortedSet<int> depthLevels, bool isBinaryTreeBalanced, int depth)
         {
             // base case
             if (root == null)
             {
-                return isBinaryTreeBalanced;
+                return true; 
             }
             // check node for 2 children
-            // if 2 children, traverse tree
+            // if 2 children, increment depth & traverse tree
             else if (root.Left != null && root.Right != null)
             {
-                IsBinaryTreeBalanced(root.Left, depthLevels, isBinaryTreeBalanced);
-                IsBinaryTreeBalanced(root.Right, depthLevels, isBinaryTreeBalanced);
+                ++depth;
+                IsBinaryTreeBalanced(root.Left, depthLevels, isBinaryTreeBalanced, depth);
+                IsBinaryTreeBalanced(root.Right, depthLevels, isBinaryTreeBalanced, depth);
             }
-            else if (root.Left != null) // if 1 child on left, record level, check for false, and traverse right
+            else if (root.Left != null) // if 1 child on left, increment depth, record level, check for false?, and traverse left
             {
-
+                ++depth;
+                depthLevels.Add(depth);
+                IsBinaryTreeBalanced(root.Left, depthLevels, isBinaryTreeBalanced, depth);
             }
-
-            
-
-            
-
-            
-
-            // if 1 child on right, record level, check for false, and traverse left
-
-            // if no children, record level, check for false, and traverse in both directions
+            else if (root.Right != null) // if 1 child on right, record level, check for false?, and traverse right
+            {
+                ++depth;
+                depthLevels.Add(depth);
+                IsBinaryTreeBalanced(root.Right, depthLevels, isBinaryTreeBalanced, depth);
+            }
+            else // if no children, increment depth, record level, check for false?
+            {
+                ++depth;
+                depthLevels.Add(depth);
+            }
 
             // return at end of method is probably necessary
+            // Evaluate depthLevels
+            return depthLevels.ElementAt(depthLevels.Count - 1) - depthLevels.ElementAt(0) <= 1;
         }
 
         private static void PrintLinkedList(LinkedList<string> linkedList)
