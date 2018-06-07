@@ -123,8 +123,16 @@ namespace Trees
             // case: root = null
             Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(null, depthLevels, false, 0)}");
 
-            // case: unbalanced tree
-            root.Left = null;
+            // case: balanced tree with a node missing at the bottom
+            root.Right.Left = null;
+            Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(root, depthLevels, false, 0)}");
+
+            // case: unbalanced tree with 2 left nulls
+            root.Left = null;            
+            Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(root, depthLevels, false, 0)}");
+
+            // case: unbalanced tree with a left null and 2 right nulls
+            root.Right.Right = null;
             Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(root, depthLevels, false, 0)}");
 
             Console.ReadKey();
