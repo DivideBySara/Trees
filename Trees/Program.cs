@@ -135,6 +135,11 @@ namespace Trees
             root.Right.Right = null;
             Console.WriteLine($"Is the binary tree balanced? {IsBinaryTreeBalanced(root, depthLevels, false, 0)}");
 
+            // 4. Given a sorted array, create a binary search tree with minimal height
+            // Q: May I use SortedSet, which is implemented using a red/black tree?
+            // Q: input = string array, output = bst?
+            string[] arr = { "a", "b", "c", "d", "e", "f", "g" };
+
             Console.ReadKey();
         }
 
