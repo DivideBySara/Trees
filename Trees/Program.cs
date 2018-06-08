@@ -139,6 +139,14 @@ namespace Trees
             // Q: May I use SortedSet, which is implemented using a red/black tree?
             // Q: input = string array, output = bst?
             string[] arr = { "a", "b", "c", "d", "e", "f", "g" };
+            var sortedSet = new SortedSet<string>(arr);
+            Console.WriteLine("\n4. Given a sorted array, create a binary search tree with minimal height");
+            Console.WriteLine("Answer using a SortedSet:");
+            foreach (string s in sortedSet)
+            {
+                Console.Write(s);
+            }
+            Console.WriteLine("\nAnswer not using built-in SortedSet:");
 
             Console.ReadKey();
         }
