@@ -138,6 +138,7 @@ namespace Trees
             // 4. Given a sorted array, create a binary search tree with minimal height
             // Q: May I use SortedSet, which is implemented using a red/black tree?
             // Q: input = string array, output = bst?
+            // Q: duplicates in data
             string[] arr = { "a", "b", "c", "d", "e", "f", "g" };
             var sortedSet = new SortedSet<string>(arr);
             Console.WriteLine("\n4. Given a sorted array, create a binary search tree with minimal height");
@@ -148,7 +149,27 @@ namespace Trees
             }
             Console.WriteLine("\nAnswer not using built-in SortedSet:");
 
+            root = null;
+            CreateBstFromSortedArray(arr, root);
+
             Console.ReadKey();
+        }
+
+        private static void CreateBstFromSortedArray(string[] arr)
+        {
+            // find midpoint of array, rounding up
+
+            // Create TreeNode
+
+            // Add to tree
+
+            // 1) base case
+
+            // 2) root has no left child
+
+            // 3) root has no right child
+
+            // 4) root has 2 children
         }
 
         private static bool IsBinaryTreeBalanced(TreeNode<string> root, SortedSet<int> depthLevels, bool isBinaryTreeBalanced, int depth)
