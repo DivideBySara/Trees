@@ -150,26 +150,41 @@ namespace Trees
             Console.WriteLine("\nAnswer not using built-in SortedSet:");
 
             root = null;
-            CreateBstFromSortedArray(arr, root);
+            int midptIndex = arr.Length / 2;
+            int startIndex = 0;
+            int endIndex = arr.Length - 1;
+            CreateBstFromSortedArray(arr, startIndex, midptIndex, endIndex, root);
 
             Console.ReadKey();
         }
 
-        private static void CreateBstFromSortedArray(string[] arr)
+        private static void CreateBstFromSortedArray(string[] arr, int startIndex, int midptIndex, int endIndex, TreeNode<string> root)
         {
-            // find midpoint of array, rounding up
+            // When to stop?
 
-            // Create TreeNode
 
-            // Add to tree
 
-            // 1) base case
-
-            // 2) root has no left child
-
-            // 3) root has no right child
-
-            // 4) root has 2 children
+            // Create TreeNode based on midpt of array
+            var treeNode = new TreeNode<string>(arr[midptIndex]);
+            
+            // 1) case root is null
+            if (root == null)
+            {
+                root = treeNode;
+            }
+            else if (root.Left == null) // 2) root has no left child
+            {
+                root.Left = treeNode;
+            }
+            else if (root.Right == null) // 3) root has no right child
+            {
+                root.Right = treeNode;
+            } 
+            else // 4) root has 2 children
+            {
+                CreateBstFromSortedArray(arr, 0, midptIndex / 2, midptIndex - 1, root.Left);
+                CreateBstFromSortedArray(arr, midptIndex + 1, midptIndex + midptIndex / 2, arr.Length - 1, root.Right);
+            }
         }
 
         private static bool IsBinaryTreeBalanced(TreeNode<string> root, SortedSet<int> depthLevels, bool isBinaryTreeBalanced, int depth)
